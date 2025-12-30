@@ -50,10 +50,10 @@ export function GameBox({ number, word, isRevealed, isRed, onClick }: GameBoxPro
         boxShadow: getBoxShadow(),
       }}
     >
-      {/* Number display */}
+      {/* Number display - z-10 ensures it stays on top during transitions */}
       <div
         className={cn(
-          "absolute inset-0 flex items-center justify-center transition-all duration-500",
+          "absolute inset-0 z-10 flex items-center justify-center transition-all duration-500",
           isRevealed ? "opacity-0 scale-50" : "opacity-100 scale-100"
         )}
       >
@@ -68,23 +68,22 @@ export function GameBox({ number, word, isRevealed, isRed, onClick }: GameBoxPro
         </span>
       </div>
 
-      {/* Word display */}
-      <div
-        className={cn(
-          "absolute inset-0 flex items-center justify-center p-2 transition-all duration-500",
-          isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-150"
-        )}
-      >
-        <span
-          className={cn(
-            "font-bold uppercase tracking-wide text-game-gold-foreground text-center leading-tight",
-            getWordSizeClass(word)
-          )}
-          style={{ wordBreak: "break-word", hyphens: "auto" }}
+      {/* Word display - only rendered when revealed */}
+      {isRevealed && (
+        <div
+          className="absolute inset-0 z-0 flex items-center justify-center p-2"
         >
-          {word}
-        </span>
-      </div>
+          <span
+            className={cn(
+              "font-bold uppercase tracking-wide text-game-gold-foreground text-center leading-tight",
+              getWordSizeClass(word)
+            )}
+            style={{ wordBreak: "break-word", hyphens: "auto" }}
+          >
+            {word}
+          </span>
+        </div>
+      )}
     </button>
   );
 }

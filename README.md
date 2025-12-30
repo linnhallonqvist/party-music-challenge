@@ -27,16 +27,9 @@ Each song follows this structure:
 - **words**: 6 words that hint at the song (displayed as boxes in the game)
 - **triviaQuestions**: Questions shown after a song is guessed (include both question and answer)
 
-### Using Backstage (Admin Panel)
+### Note on Backstage (Admin Panel)
 
-The app includes a Backstage page (`/admin`) where you can add, edit, and delete songs through a UI.
-
-**Important:** Changes made in Backstage are stored in your browser's local storage only. This means:
-- Changes will NOT persist if you clear browser data
-- Changes will NOT sync across devices or browsers
-- Changes will NOT be saved to the codebase
-
-To make permanent changes that persist across all users and deployments, edit `src/data/songs.json` directly.
+The app has a Backstage page (`/admin`) but it is currently non-functional. To add or edit songs, edit `src/data/songs.json` directly.
 
 ---
 

@@ -1,20 +1,9 @@
-import { useLocalStorage } from "./useLocalStorage";
-import { useEffect } from "react";
+import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, DEFAULT_TEAMS, Song, SONGS } from "@/types/game";
 
 export function useGameState() {
-  const [rawGameState, setGameState] = useLocalStorage<GameState>("game-state", DEFAULT_GAME_STATE);
-  const [songs, setSongs] = useLocalStorage<Song[]>("songs-library", SONGS);
-
-  // Ensure gameState always has valid structure
-  const gameState: GameState = {
-    ...DEFAULT_GAME_STATE,
-    ...rawGameState,
-    teams: rawGameState.teams?.length === 2 ? rawGameState.teams : DEFAULT_TEAMS,
-    playedSongIds: Array.isArray(rawGameState.playedSongIds) ? rawGameState.playedSongIds : [],
-    revealedBoxes: Array.isArray(rawGameState.revealedBoxes) ? rawGameState.revealedBoxes : [],
-    redBoxIndices: Array.isArray(rawGameState.redBoxIndices) ? rawGameState.redBoxIndices : [],
-  };
+  const [gameState, setGameState] = useState<GameState>(DEFAULT_GAME_STATE);
+  const [songs, setSongs] = useState<Song[]>(SONGS);
 
   // Helper to generate random red box indices for a song
   const generateRedBoxIndices = (wordCount: number): number[] => {
@@ -24,19 +13,6 @@ export function useGameState() {
     const count = Math.random() < 0.5 ? 1 : 2;
     return shuffled.slice(0, count);
   };
-
-  // Migrate old triviaQuestions format (string[]) to new format ({ question, answer }[])
-  useEffect(() => {
-    const needsMigration = songs.some(
-      (song) =>
-        song.triviaQuestions.length > 0 &&
-        typeof song.triviaQuestions[0] === "string"
-    );
-    if (needsMigration) {
-      // Reset to fresh data from JSON file
-      setSongs(SONGS);
-    }
-  }, []);
 
   const revealBox = (index: number) => {
     setGameState((prev) => ({

@@ -87,6 +87,15 @@ export function useGameState() {
     }));
   };
 
+  const subtractPoint = (teamIndex: number) => {
+    setGameState((prev) => ({
+      ...prev,
+      teams: prev.teams.map((team, i) =>
+        i === teamIndex ? { ...team, score: Math.max(0, team.score - 1) } : team
+      ),
+    }));
+  };
+
   const updateTeamName = (teamIndex: number, name: string) => {
     setGameState((prev) => ({
       ...prev,
@@ -165,6 +174,7 @@ export function useGameState() {
     selectNextSong,
     switchTeam,
     awardPoint,
+    subtractPoint,
     updateTeamName,
     setTimerSeconds,
     setTimerRunning,

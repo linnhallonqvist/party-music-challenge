@@ -13,11 +13,10 @@ export default function Game() {
     gameState,
     songs,
     revealBox,
-    revealAllBoxes,
-    hideAllBoxes,
     selectNextSong,
     switchTeam,
     awardPoint,
+    subtractPoint,
     updateTeamName,
     setTimerSeconds,
     setTimerRunning,
@@ -55,12 +54,15 @@ export default function Game() {
 
   // Show welcome screen if game hasn't started
   if (!gameState.hasStarted) {
-    return <WelcomeScreen onStart={startGame} />;
+    return <WelcomeScreen onStart={(team1, team2) => {
+      startGame(team1, team2);
+      selectNextSong();
+    }} />;
   }
 
-  const handleNewRound = () => {
+  const handleNextSong = () => {
     selectNextSong();
-    setTimerSeconds(30);
+    setTimerSeconds(20);
     setTimerRunning(false);
   };
 
@@ -74,14 +76,14 @@ export default function Game() {
     if (gameState.redBoxIndices.includes(index)) {
       switchTeam();
       // Reset timer for the other team
-      setTimerSeconds(30);
+      setTimerSeconds(20);
       setTimerRunning(true);
       return;
     }
 
     // Start timer when revealing a box
     if (!gameState.isTimerRunning) {
-      setTimerSeconds(30);
+      setTimerSeconds(20);
       setTimerRunning(true);
     }
   };
@@ -90,7 +92,7 @@ export default function Game() {
     const isLastQuestion = currentSong && gameState.currentTriviaIndex >= currentSong.triviaQuestions.length - 1;
     if (isLastQuestion) {
       hideTrivia();
-      handleNewRound();
+      handleNextSong();
     } else {
       nextTrivia();
     }
@@ -117,7 +119,7 @@ export default function Game() {
 
       {/* Header with title */}
       <header className="text-center mb-6 relative z-10">
-        <h1 
+        <h1
           className="text-4xl md:text-6xl font-black tracking-tight"
           style={{
             background: "linear-gradient(180deg, hsl(45 93% 65%) 0%, hsl(45 93% 45%) 100%)",
@@ -128,6 +130,9 @@ export default function Game() {
         >
           Så Ska Det Låta
         </h1>
+        <p className="text-muted-foreground mt-2">
+          Låt {gameState.playedSongIds.length} av {songs.length}
+        </p>
       </header>
 
       {/* Game Boxes - Horizontal row at top */}
@@ -148,6 +153,7 @@ export default function Game() {
           teamIndex={0}
           isActive={gameState.currentTeamIndex === 0}
           onAwardPoint={() => awardPoint(0)}
+          onSubtractPoint={() => subtractPoint(0)}
           onUpdateName={(name) => updateTeamName(0, name)}
         />
 
@@ -181,6 +187,7 @@ export default function Game() {
           teamIndex={1}
           isActive={gameState.currentTeamIndex === 1}
           onAwardPoint={() => awardPoint(1)}
+          onSubtractPoint={() => subtractPoint(1)}
           onUpdateName={(name) => updateTeamName(1, name)}
         />
       </div>
@@ -188,12 +195,9 @@ export default function Game() {
       {/* Game Controls - Bottom */}
       <div className="mt-8 relative z-10">
         <GameControls
-          onRevealAll={revealAllBoxes}
-          onHideAll={hideAllBoxes}
           onSwitchTeam={switchTeam}
           onShowTrivia={handleCorrectAnswer}
           onResetGame={resetGame}
-          onNewRound={handleNewRound}
           hasCurrentSong={!!currentSong}
         />
       </div>

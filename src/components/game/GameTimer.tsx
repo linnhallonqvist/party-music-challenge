@@ -16,7 +16,7 @@ export function GameTimer({
   isRunning,
   onSecondsChange,
   onRunningChange,
-  defaultSeconds = 30,
+  defaultSeconds = 20,
 }: GameTimerProps) {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 

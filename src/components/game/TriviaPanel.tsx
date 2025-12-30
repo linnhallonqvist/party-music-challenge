@@ -22,8 +22,8 @@ export function TriviaPanel({
   artist,
 }: TriviaPanelProps) {
   const [showAnswer, setShowAnswer] = useState(false);
-  const isComplete = currentIndex >= questions.length;
   const currentQuestion = questions[currentIndex];
+  const isLastQuestion = currentIndex >= questions.length - 1;
 
   const handleNext = () => {
     setShowAnswer(false);
@@ -48,47 +48,36 @@ export function TriviaPanel({
         </div>
       </CardHeader>
       <CardContent>
-        {isComplete ? (
-          <div className="text-center py-4">
-            <p className="text-xl font-semibold text-muted-foreground">
-              Alla följdfrågor besvarade!
-            </p>
-            <Button onClick={onClose} className="mt-4 bg-game-gold text-game-gold-foreground hover:bg-game-gold/90">
-              Nästa låt
-            </Button>
+        <div className="space-y-4">
+          <div className="text-sm text-muted-foreground">
+            Följdfråga {currentIndex + 1} av {questions.length}
           </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="text-sm text-muted-foreground">
-              Följdfråga {currentIndex + 1} av {questions.length}
-            </div>
-            <p className="text-xl md:text-2xl font-medium text-foreground">
-              {currentQuestion.question}
-            </p>
+          <p className="text-xl md:text-2xl font-medium text-foreground">
+            {currentQuestion.question}
+          </p>
 
-            {showAnswer ? (
-              <>
-                <div className="p-4 rounded-lg bg-game-gold/20 border border-game-gold">
-                  <p className="text-lg font-bold text-game-gold">
-                    {currentQuestion.answer}
-                  </p>
-                </div>
-                <Button onClick={handleNext} className="w-full bg-game-gold text-game-gold-foreground hover:bg-game-gold/90">
-                  Nästa fråga <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
-              </>
-            ) : (
-              <Button
-                variant="outline"
-                onClick={() => setShowAnswer(true)}
-                className="w-full border-game-gold text-game-gold hover:bg-game-gold/10"
-              >
-                <Eye className="w-4 h-4 mr-2" />
-                Visa svar
+          {showAnswer ? (
+            <>
+              <div className="p-4 rounded-lg bg-game-gold/20 border border-game-gold">
+                <p className="text-lg font-bold text-game-gold">
+                  {currentQuestion.answer}
+                </p>
+              </div>
+              <Button onClick={handleNext} className="w-full bg-game-gold text-game-gold-foreground hover:bg-game-gold/90">
+                {isLastQuestion ? "Nästa låt" : "Nästa fråga"} <ChevronRight className="w-4 h-4 ml-2" />
               </Button>
-            )}
-          </div>
-        )}
+            </>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => setShowAnswer(true)}
+              className="w-full border-game-gold text-game-gold hover:bg-game-gold/10"
+            >
+              <Eye className="w-4 h-4 mr-2" />
+              Visa svar
+            </Button>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

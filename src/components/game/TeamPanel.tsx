@@ -1,7 +1,7 @@
 import { Team } from "@/types/game";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -10,6 +10,7 @@ interface TeamPanelProps {
   teamIndex: number;
   isActive: boolean;
   onAwardPoint: () => void;
+  onSubtractPoint: () => void;
   onUpdateName: (name: string) => void;
 }
 
@@ -18,6 +19,7 @@ export function TeamPanel({
   teamIndex,
   isActive,
   onAwardPoint,
+  onSubtractPoint,
   onUpdateName,
 }: TeamPanelProps) {
   const [isEditing, setIsEditing] = useState(false);
@@ -88,19 +90,33 @@ export function TeamPanel({
         >
           {team.score}
         </div>
-        <Button
-          size="lg"
-          className={cn(
-            "text-lg font-bold",
-            teamIndex === 0 
-              ? "bg-team-red hover:bg-team-red/80 text-white" 
-              : "bg-team-blue hover:bg-team-blue/80 text-white"
-          )}
-          onClick={onAwardPoint}
-        >
-          <Plus className="w-5 h-5 mr-1" />
-          Poäng
-        </Button>
+        <div className="flex gap-2 justify-center">
+          <Button
+            size="lg"
+            variant="outline"
+            className={cn(
+              "text-lg font-bold",
+              teamIndex === 0
+                ? "border-team-red text-team-red hover:bg-team-red/10"
+                : "border-team-blue text-team-blue hover:bg-team-blue/10"
+            )}
+            onClick={onSubtractPoint}
+          >
+            <Minus className="w-5 h-5" />
+          </Button>
+          <Button
+            size="lg"
+            className={cn(
+              "text-lg font-bold",
+              teamIndex === 0
+                ? "bg-team-red hover:bg-team-red/80 text-white"
+                : "bg-team-blue hover:bg-team-blue/80 text-white"
+            )}
+            onClick={onAwardPoint}
+          >
+            <Plus className="w-5 h-5" />
+          </Button>
+        </div>
       </div>
     </div>
   );

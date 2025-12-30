@@ -47,7 +47,7 @@ export const DEFAULT_GAME_STATE: GameState = {
   redBoxIndices: [],
   currentTeamIndex: 0,
   teams: DEFAULT_TEAMS,
-  timerSeconds: 30,
+  timerSeconds: 20,
   isTimerRunning: false,
   showTrivia: false,
   currentTriviaIndex: 0,

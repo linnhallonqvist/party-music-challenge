@@ -4,10 +4,11 @@ import { Song } from "@/types/game";
 interface GameBoardProps {
   song: Song | null;
   revealedBoxes: number[];
+  redBoxIndices: number[];
   onRevealBox: (index: number) => void;
 }
 
-export function GameBoard({ song, revealedBoxes, onRevealBox }: GameBoardProps) {
+export function GameBoard({ song, revealedBoxes, redBoxIndices, onRevealBox }: GameBoardProps) {
   if (!song) {
     return (
       <div className="flex items-center justify-center h-32 text-muted-foreground">
@@ -24,6 +25,7 @@ export function GameBoard({ song, revealedBoxes, onRevealBox }: GameBoardProps) 
             number={index + 1}
             word={word}
             isRevealed={revealedBoxes.includes(index)}
+            isRed={redBoxIndices.includes(index)}
             onClick={() => onRevealBox(index)}
           />
         </div>

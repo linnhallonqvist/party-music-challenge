@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Song } from "@/types/game";
+import { Song, TriviaQuestion } from "@/types/game";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Plus, Save, X } from "lucide-react";
+import { Save, X } from "lucide-react";
 
 interface SongFormProps {
   song?: Song;
@@ -13,11 +13,32 @@ interface SongFormProps {
   onCancel: () => void;
 }
 
+function triviaToText(questions: TriviaQuestion[]): string {
+  return questions.map((q) => `${q.question} | ${q.answer}`).join("\n");
+}
+
+function textToTrivia(text: string): TriviaQuestion[] {
+  return text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const parts = line.split("|");
+      return {
+        question: parts[0]?.trim() || "",
+        answer: parts[1]?.trim() || "",
+      };
+    })
+    .filter((q) => q.question);
+}
+
 export function SongForm({ song, onSave, onCancel }: SongFormProps) {
   const [title, setTitle] = useState(song?.title || "");
   const [artist, setArtist] = useState(song?.artist || "");
   const [wordsText, setWordsText] = useState(song?.words.join(", ") || "");
-  const [triviaText, setTriviaText] = useState(song?.triviaQuestions.join("\n") || "");
+  const [triviaText, setTriviaText] = useState(
+    song?.triviaQuestions ? triviaToText(song.triviaQuestions) : ""
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +47,7 @@ export function SongForm({ song, onSave, onCancel }: SongFormProps) {
       title,
       artist,
       words: wordsText.split(",").map((w) => w.trim()).filter(Boolean),
-      triviaQuestions: triviaText.split("\n").map((q) => q.trim()).filter(Boolean),
+      triviaQuestions: textToTrivia(triviaText),
     };
     onSave(newSong);
   };
@@ -75,12 +96,14 @@ export function SongForm({ song, onSave, onCancel }: SongFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="trivia">Följdfrågor (en per rad)</Label>
+            <Label htmlFor="trivia">
+              Följdfrågor med svar (format: Fråga | Svar, en per rad)
+            </Label>
             <Textarea
               id="trivia"
               value={triviaText}
               onChange={(e) => setTriviaText(e.target.value)}
-              placeholder="Vilken år släpptes låten?&#10;Vem skrev låten?&#10;I vilken film används låten?"
+              placeholder="Vilket år släpptes låten? | 1976&#10;Vem skrev låten? | Benny Andersson"
               rows={4}
             />
           </div>

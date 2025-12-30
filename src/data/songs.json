@@ -1,0 +1,24 @@
+[
+  {
+    "id": "song-1",
+    "title": "Dancing Queen",
+    "artist": "ABBA",
+    "words": ["Friday", "night", "dancing", "queen", "seventeen", "tambourine"],
+    "triviaQuestions": [
+      { "question": "Vilket år släpptes Dancing Queen?", "answer": "1976" },
+      { "question": "Vilken medlem i ABBA skrev huvudmelodin?", "answer": "Benny Andersson" },
+      { "question": "I vilken film används låten i en ikonisk scen?", "answer": "Mamma Mia!" }
+    ]
+  },
+  {
+    "id": "song-2",
+    "title": "Sommartider",
+    "artist": "Gyllene Tider",
+    "words": ["sommartider", "ringer", "glömma", "vågor", "strand", "sol"],
+    "triviaQuestions": [
+      { "question": "Vem är sångare i Gyllene Tider?", "answer": "Per Gessle" },
+      { "question": "Vilket år släpptes Sommartider?", "answer": "1982" },
+      { "question": "Vilket skivbolag gav ut låten?", "answer": "EMI" }
+    ]
+  }
+]

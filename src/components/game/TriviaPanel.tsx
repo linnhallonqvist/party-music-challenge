@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronRight, X, Trophy, Music } from "lucide-react";
+import { ChevronRight, X, Trophy, Music, Eye } from "lucide-react";
+import { TriviaQuestion } from "@/types/game";
 
 interface TriviaPanelProps {
-  questions: string[];
+  questions: TriviaQuestion[];
   currentIndex: number;
   onNext: () => void;
   onClose: () => void;
@@ -19,7 +21,14 @@ export function TriviaPanel({
   songTitle,
   artist,
 }: TriviaPanelProps) {
+  const [showAnswer, setShowAnswer] = useState(false);
   const isComplete = currentIndex >= questions.length;
+  const currentQuestion = questions[currentIndex];
+
+  const handleNext = () => {
+    setShowAnswer(false);
+    onNext();
+  };
 
   return (
     <Card className="bg-card/95 border-2 border-game-gold shadow-[0_0_40px_rgba(234,179,8,0.3)]">
@@ -54,11 +63,30 @@ export function TriviaPanel({
               Följdfråga {currentIndex + 1} av {questions.length}
             </div>
             <p className="text-xl md:text-2xl font-medium text-foreground">
-              {questions[currentIndex]}
+              {currentQuestion.question}
             </p>
-            <Button onClick={onNext} className="w-full bg-game-gold text-game-gold-foreground hover:bg-game-gold/90">
-              Nästa fråga <ChevronRight className="w-4 h-4 ml-2" />
-            </Button>
+
+            {showAnswer ? (
+              <>
+                <div className="p-4 rounded-lg bg-game-gold/20 border border-game-gold">
+                  <p className="text-lg font-bold text-game-gold">
+                    {currentQuestion.answer}
+                  </p>
+                </div>
+                <Button onClick={handleNext} className="w-full bg-game-gold text-game-gold-foreground hover:bg-game-gold/90">
+                  Nästa fråga <ChevronRight className="w-4 h-4 ml-2" />
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="outline"
+                onClick={() => setShowAnswer(true)}
+                className="w-full border-game-gold text-game-gold hover:bg-game-gold/10"
+              >
+                <Eye className="w-4 h-4 mr-2" />
+                Visa svar
+              </Button>
+            )}
           </div>
         )}
       </CardContent>

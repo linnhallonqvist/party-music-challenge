@@ -4,6 +4,8 @@ import { TeamPanel } from "@/components/game/TeamPanel";
 import { GameTimer } from "@/components/game/GameTimer";
 import { TriviaPanel } from "@/components/game/TriviaPanel";
 import { GameControls } from "@/components/game/GameControls";
+import { GameSummary } from "@/components/game/GameSummary";
+import { WelcomeScreen } from "@/components/game/WelcomeScreen";
 import { useCallback } from "react";
 
 export default function Game() {
@@ -13,7 +15,7 @@ export default function Game() {
     revealBox,
     revealAllBoxes,
     hideAllBoxes,
-    selectSong,
+    selectNextSong,
     switchTeam,
     awardPoint,
     updateTeamName,
@@ -22,53 +24,23 @@ export default function Game() {
     showTrivia,
     nextTrivia,
     hideTrivia,
+    startGame,
     resetGame,
   } = useGameState();
 
   const currentSong = songs.find((s) => s.id === gameState.currentSongId) || null;
 
-  const selectRandomSong = () => {
-    if (songs.length === 0) return;
-    
-    // Filter out the current song to avoid repeating
-    const availableSongs = songs.filter((s) => s.id !== gameState.currentSongId);
-    const songsToChooseFrom = availableSongs.length > 0 ? availableSongs : songs;
-    
-    const randomIndex = Math.floor(Math.random() * songsToChooseFrom.length);
-    selectSong(songsToChooseFrom[randomIndex].id);
-    setTimerSeconds(30);
-    setTimerRunning(false);
-  };
-
-  const handleRevealBox = (index: number) => {
-    revealBox(index);
-    // Start timer when revealing a box
-    if (!gameState.isTimerRunning) {
-      setTimerSeconds(30);
-      setTimerRunning(true);
-    }
-  };
-
-  const handleNextTrivia = () => {
-    const isLastQuestion = currentSong && gameState.currentTriviaIndex >= currentSong.triviaQuestions.length - 1;
-    if (isLastQuestion) {
-      hideTrivia();
-      selectRandomSong();
-    } else {
-      nextTrivia();
-    }
-  };
-
+  // All hooks must be called before any early returns
   const handleCorrectAnswer = useCallback(() => {
     if (!currentSong) return;
-    
+
     setTimerRunning(false);
-    
+
     // Reveal boxes one by one from left to right
     const unrevealedBoxes = currentSong.words
       .map((_, index) => index)
       .filter((index) => !gameState.revealedBoxes.includes(index));
-    
+
     unrevealedBoxes.forEach((boxIndex, i) => {
       setTimeout(() => {
         revealBox(boxIndex);
@@ -80,6 +52,49 @@ export default function Game() {
       showTrivia();
     }, unrevealedBoxes.length * 300 + 200);
   }, [currentSong, gameState.revealedBoxes, revealBox, setTimerRunning, showTrivia]);
+
+  // Show welcome screen if game hasn't started
+  if (!gameState.hasStarted) {
+    return <WelcomeScreen onStart={startGame} />;
+  }
+
+  const handleNewRound = () => {
+    selectNextSong();
+    setTimerSeconds(30);
+    setTimerRunning(false);
+  };
+
+  const handleRevealBox = (index: number) => {
+    // Don't reveal already revealed boxes
+    if (gameState.revealedBoxes.includes(index)) return;
+
+    revealBox(index);
+
+    // Check if this is a red box - if so, switch teams
+    if (gameState.redBoxIndices.includes(index)) {
+      switchTeam();
+      // Reset timer for the other team
+      setTimerSeconds(30);
+      setTimerRunning(true);
+      return;
+    }
+
+    // Start timer when revealing a box
+    if (!gameState.isTimerRunning) {
+      setTimerSeconds(30);
+      setTimerRunning(true);
+    }
+  };
+
+  const handleNextTrivia = () => {
+    const isLastQuestion = currentSong && gameState.currentTriviaIndex >= currentSong.triviaQuestions.length - 1;
+    if (isLastQuestion) {
+      hideTrivia();
+      handleNewRound();
+    } else {
+      nextTrivia();
+    }
+  };
 
   return (
     <div 
@@ -120,6 +135,7 @@ export default function Game() {
         <GameBoard
           song={currentSong}
           revealedBoxes={gameState.revealedBoxes}
+          redBoxIndices={gameState.redBoxIndices}
           onRevealBox={handleRevealBox}
         />
       </div>
@@ -177,10 +193,15 @@ export default function Game() {
           onSwitchTeam={switchTeam}
           onShowTrivia={handleCorrectAnswer}
           onResetGame={resetGame}
-          onNewRound={selectRandomSong}
+          onNewRound={handleNewRound}
           hasCurrentSong={!!currentSong}
         />
       </div>
+
+      {/* Game Summary - shown when all songs are played */}
+      {gameState.isGameComplete && (
+        <GameSummary teams={gameState.teams} onPlayAgain={resetGame} />
+      )}
     </div>
   );
 }

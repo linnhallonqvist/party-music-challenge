@@ -35,6 +35,27 @@ export default function Game() {
     
     const randomIndex = Math.floor(Math.random() * songsToChooseFrom.length);
     selectSong(songsToChooseFrom[randomIndex].id);
+    setTimerSeconds(30);
+    setTimerRunning(false);
+  };
+
+  const handleRevealBox = (index: number) => {
+    revealBox(index);
+    // Start timer when revealing a box
+    if (!gameState.isTimerRunning) {
+      setTimerSeconds(30);
+      setTimerRunning(true);
+    }
+  };
+
+  const handleNextTrivia = () => {
+    const isLastQuestion = currentSong && gameState.currentTriviaIndex >= currentSong.triviaQuestions.length - 1;
+    if (isLastQuestion) {
+      hideTrivia();
+      selectRandomSong();
+    } else {
+      nextTrivia();
+    }
   };
 
   return (
@@ -76,7 +97,7 @@ export default function Game() {
         <GameBoard
           song={currentSong}
           revealedBoxes={gameState.revealedBoxes}
-          onRevealBox={revealBox}
+          onRevealBox={handleRevealBox}
         />
       </div>
 
@@ -106,7 +127,7 @@ export default function Game() {
               <TriviaPanel
                 questions={currentSong.triviaQuestions}
                 currentIndex={gameState.currentTriviaIndex}
-                onNext={nextTrivia}
+                onNext={handleNextTrivia}
                 onClose={hideTrivia}
                 songTitle={currentSong.title}
                 artist={currentSong.artist}

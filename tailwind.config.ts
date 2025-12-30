@@ -65,6 +65,10 @@ export default {
           DEFAULT: "hsl(var(--game-gold))",
           foreground: "hsl(var(--game-gold-foreground))",
         },
+        "game-panel": {
+          DEFAULT: "hsl(var(--game-panel))",
+          border: "hsl(var(--game-panel-border))",
+        },
         "team-red": "hsl(var(--team-red))",
         "team-blue": "hsl(var(--team-blue))",
       },

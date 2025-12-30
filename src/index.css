@@ -8,99 +8,102 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 225 60% 12%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 225 50% 18%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 225 50% 15%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 50%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 45 93% 55%;
+    --primary-foreground: 225 60% 10%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 225 50% 25%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 225 40% 20%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 225 50% 25%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 50%;
+    --border: 225 40% 25%;
+    --input: 225 40% 25%;
+    --ring: 45 93% 55%;
 
     --radius: 0.75rem;
 
-    /* Game-specific colors */
-    --game-blue: 217 91% 45%;
-    --game-blue-foreground: 0 0% 100%;
-    --game-gold: 45 93% 47%;
-    --game-gold-foreground: 0 0% 10%;
-    --team-red: 0 72% 51%;
-    --team-blue: 217 91% 50%;
+    /* Game-specific colors - TV show inspired */
+    --game-blue: 225 70% 35%;
+    --game-blue-foreground: 210 40% 98%;
+    --game-gold: 45 93% 55%;
+    --game-gold-foreground: 225 60% 10%;
+    --team-red: 350 80% 55%;
+    --team-blue: 200 80% 55%;
+    --game-panel: 240 60% 25%;
+    --game-panel-border: 240 50% 40%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 225 50% 15%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 45 93% 55%;
+    --sidebar-primary-foreground: 225 60% 10%;
+    --sidebar-accent: 225 50% 25%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 225 40% 25%;
+    --sidebar-ring: 45 93% 55%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 225 60% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 7%;
+    --card: 225 50% 12%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 225 50% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 45 93% 55%;
+    --primary-foreground: 225 60% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 225 50% 20%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 225 40% 15%;
+    --muted-foreground: 215 20% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 225 50% 20%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 72% 45%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 217 91% 60%;
+    --border: 225 40% 20%;
+    --input: 225 40% 20%;
+    --ring: 45 93% 55%;
 
-    /* Game-specific colors - dark mode */
-    --game-blue: 217 91% 55%;
-    --game-blue-foreground: 0 0% 100%;
-    --game-gold: 45 93% 55%;
-    --game-gold-foreground: 0 0% 10%;
-    --team-red: 0 72% 55%;
-    --team-blue: 217 91% 60%;
+    --game-blue: 225 70% 30%;
+    --game-blue-foreground: 210 40% 98%;
+    --game-gold: 45 93% 50%;
+    --game-gold-foreground: 225 60% 10%;
+    --team-red: 350 80% 50%;
+    --team-blue: 200 80% 50%;
+    --game-panel: 240 60% 20%;
+    --game-panel-border: 240 50% 35%;
 
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 225 50% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 45 93% 55%;
+    --sidebar-primary-foreground: 225 60% 10%;
+    --sidebar-accent: 225 50% 20%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 225 40% 20%;
+    --sidebar-ring: 45 93% 55%;
   }
 }
 

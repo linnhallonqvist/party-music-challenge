@@ -4,6 +4,7 @@ import { TeamPanel } from "@/components/game/TeamPanel";
 import { GameTimer } from "@/components/game/GameTimer";
 import { TriviaPanel } from "@/components/game/TriviaPanel";
 import { GameControls } from "@/components/game/GameControls";
+import { useCallback } from "react";
 
 export default function Game() {
   const {
@@ -57,6 +58,28 @@ export default function Game() {
       nextTrivia();
     }
   };
+
+  const handleCorrectAnswer = useCallback(() => {
+    if (!currentSong) return;
+    
+    setTimerRunning(false);
+    
+    // Reveal boxes one by one from left to right
+    const unrevealedBoxes = currentSong.words
+      .map((_, index) => index)
+      .filter((index) => !gameState.revealedBoxes.includes(index));
+    
+    unrevealedBoxes.forEach((boxIndex, i) => {
+      setTimeout(() => {
+        revealBox(boxIndex);
+      }, i * 300);
+    });
+
+    // Show trivia after all boxes are revealed
+    setTimeout(() => {
+      showTrivia();
+    }, unrevealedBoxes.length * 300 + 200);
+  }, [currentSong, gameState.revealedBoxes, revealBox, setTimerRunning, showTrivia]);
 
   return (
     <div 
@@ -152,7 +175,7 @@ export default function Game() {
           onRevealAll={revealAllBoxes}
           onHideAll={hideAllBoxes}
           onSwitchTeam={switchTeam}
-          onShowTrivia={showTrivia}
+          onShowTrivia={handleCorrectAnswer}
           onResetGame={resetGame}
           onNewRound={selectRandomSong}
           hasCurrentSong={!!currentSong}

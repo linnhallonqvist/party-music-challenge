@@ -52,11 +52,18 @@ export function GameTimer({
     <div className="flex flex-col items-center gap-4">
       <div
         className={cn(
-          "text-6xl md:text-8xl font-mono font-bold transition-colors duration-300",
-          isCritical && "text-destructive animate-pulse",
+          "text-7xl md:text-9xl font-mono font-bold transition-all duration-300",
+          isCritical && "text-destructive animate-pulse scale-110",
           isLow && !isCritical && "text-game-gold",
           !isLow && "text-foreground"
         )}
+        style={{
+          textShadow: isCritical 
+            ? "0 0 40px hsl(0 72% 51% / 0.8)" 
+            : isLow 
+              ? "0 0 40px hsl(45 93% 55% / 0.5)" 
+              : "0 0 20px rgba(255,255,255,0.3)"
+        }}
       >
         {String(Math.floor(seconds / 60)).padStart(2, "0")}:
         {String(seconds % 60).padStart(2, "0")}
@@ -66,7 +73,10 @@ export function GameTimer({
           size="lg"
           variant={isRunning ? "destructive" : "default"}
           onClick={toggle}
-          className="min-w-[120px]"
+          className={cn(
+            "min-w-[140px] font-bold",
+            !isRunning && "bg-game-gold text-game-gold-foreground hover:bg-game-gold/90"
+          )}
         >
           {isRunning ? (
             <>
@@ -78,7 +88,7 @@ export function GameTimer({
             </>
           )}
         </Button>
-        <Button size="lg" variant="outline" onClick={reset}>
+        <Button size="lg" variant="secondary" onClick={reset}>
           <RotateCcw className="w-5 h-5 mr-2" /> Reset
         </Button>
       </div>

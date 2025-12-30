@@ -3,11 +3,7 @@ import { GameBoard } from "@/components/game/GameBoard";
 import { TeamPanel } from "@/components/game/TeamPanel";
 import { GameTimer } from "@/components/game/GameTimer";
 import { TriviaPanel } from "@/components/game/TriviaPanel";
-import { SongSelector } from "@/components/game/SongSelector";
 import { GameControls } from "@/components/game/GameControls";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { Settings } from "lucide-react";
 
 export default function Game() {
   const {
@@ -30,30 +26,62 @@ export default function Game() {
 
   const currentSong = songs.find((s) => s.id === gameState.currentSongId) || null;
 
+  const selectRandomSong = () => {
+    if (songs.length === 0) return;
+    
+    // Filter out the current song to avoid repeating
+    const availableSongs = songs.filter((s) => s.id !== gameState.currentSongId);
+    const songsToChooseFrom = availableSongs.length > 0 ? availableSongs : songs;
+    
+    const randomIndex = Math.floor(Math.random() * songsToChooseFrom.length);
+    selectSong(songsToChooseFrom[randomIndex].id);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-game-blue/10 p-4 md:p-8">
-      {/* Header */}
-      <header className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl md:text-4xl font-bold text-foreground">
-          🎵 Så Ska Det Låta
+    <div 
+      className="min-h-screen p-4 md:p-6 flex flex-col"
+      style={{
+        background: "radial-gradient(ellipse at center, hsl(225 60% 18%) 0%, hsl(225 60% 8%) 100%)",
+      }}
+    >
+      {/* Decorative background pattern */}
+      <div 
+        className="fixed inset-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 20%, hsl(45 93% 55% / 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, hsl(45 93% 55% / 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, hsl(200 80% 55% / 0.1) 0%, transparent 70%)
+          `,
+        }}
+      />
+
+      {/* Header with title */}
+      <header className="text-center mb-6 relative z-10">
+        <h1 
+          className="text-4xl md:text-6xl font-black tracking-tight"
+          style={{
+            background: "linear-gradient(180deg, hsl(45 93% 65%) 0%, hsl(45 93% 45%) 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "0 4px 30px hsl(45 93% 55% / 0.5)",
+          }}
+        >
+          Så Ska Det Låta
         </h1>
-        <div className="flex items-center gap-4">
-          <SongSelector
-            songs={songs}
-            currentSongId={gameState.currentSongId}
-            onSelectSong={selectSong}
-          />
-          <Button variant="outline" asChild>
-            <Link to="/admin">
-              <Settings className="w-4 h-4 mr-2" />
-              Backstage
-            </Link>
-          </Button>
-        </div>
       </header>
 
-      {/* Main Game Area */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-6 mb-8">
+      {/* Game Boxes - Horizontal row at top */}
+      <div className="mb-8 relative z-10">
+        <GameBoard
+          song={currentSong}
+          revealedBoxes={gameState.revealedBoxes}
+          onRevealBox={revealBox}
+        />
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 items-start relative z-10">
         {/* Team 1 */}
         <TeamPanel
           team={gameState.teams[0]}
@@ -63,15 +91,8 @@ export default function Game() {
           onUpdateName={(name) => updateTeamName(0, name)}
         />
 
-        {/* Game Board */}
-        <div className="space-y-6">
-          <GameBoard
-            song={currentSong}
-            revealedBoxes={gameState.revealedBoxes}
-            onRevealBox={revealBox}
-          />
-
-          {/* Timer */}
+        {/* Center - Timer and Trivia */}
+        <div className="flex flex-col items-center gap-6 min-w-[300px]">
           <GameTimer
             seconds={gameState.timerSeconds}
             isRunning={gameState.isTimerRunning}
@@ -81,14 +102,16 @@ export default function Game() {
 
           {/* Trivia Panel */}
           {gameState.showTrivia && currentSong && (
-            <TriviaPanel
-              questions={currentSong.triviaQuestions}
-              currentIndex={gameState.currentTriviaIndex}
-              onNext={nextTrivia}
-              onClose={hideTrivia}
-              songTitle={currentSong.title}
-              artist={currentSong.artist}
-            />
+            <div className="w-full max-w-md">
+              <TriviaPanel
+                questions={currentSong.triviaQuestions}
+                currentIndex={gameState.currentTriviaIndex}
+                onNext={nextTrivia}
+                onClose={hideTrivia}
+                songTitle={currentSong.title}
+                artist={currentSong.artist}
+              />
+            </div>
           )}
         </div>
 
@@ -102,15 +125,18 @@ export default function Game() {
         />
       </div>
 
-      {/* Game Controls */}
-      <GameControls
-        onRevealAll={revealAllBoxes}
-        onHideAll={hideAllBoxes}
-        onSwitchTeam={switchTeam}
-        onShowTrivia={showTrivia}
-        onResetGame={resetGame}
-        hasCurrentSong={!!currentSong}
-      />
+      {/* Game Controls - Bottom */}
+      <div className="mt-8 relative z-10">
+        <GameControls
+          onRevealAll={revealAllBoxes}
+          onHideAll={hideAllBoxes}
+          onSwitchTeam={switchTeam}
+          onShowTrivia={showTrivia}
+          onResetGame={resetGame}
+          onNewRound={selectRandomSong}
+          hasCurrentSong={!!currentSong}
+        />
+      </div>
     </div>
   );
 }

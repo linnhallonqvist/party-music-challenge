@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronRight, X, Trophy } from "lucide-react";
+import { ChevronRight, X, Trophy, Music } from "lucide-react";
 
 interface TriviaPanelProps {
   questions: string[];
@@ -22,20 +22,21 @@ export function TriviaPanel({
   const isComplete = currentIndex >= questions.length;
 
   return (
-    <Card className="bg-game-gold/10 border-2 border-game-gold">
+    <Card className="bg-card/95 border-2 border-game-gold shadow-[0_0_40px_rgba(234,179,8,0.3)]">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-game-gold">
             <Trophy className="w-6 h-6" />
             Rätt svar!
           </CardTitle>
-          <Button variant="ghost" size="icon" onClick={onClose}>
+          <Button variant="ghost" size="icon" onClick={onClose} className="text-muted-foreground hover:text-foreground">
             <X className="w-5 h-5" />
           </Button>
         </div>
-        <p className="text-lg font-bold text-foreground">
+        <div className="flex items-center gap-2 text-lg font-bold text-foreground">
+          <Music className="w-5 h-5 text-game-gold" />
           {songTitle} - {artist}
-        </p>
+        </div>
       </CardHeader>
       <CardContent>
         {isComplete ? (
@@ -43,7 +44,7 @@ export function TriviaPanel({
             <p className="text-xl font-semibold text-muted-foreground">
               Alla följdfrågor besvarade!
             </p>
-            <Button onClick={onClose} className="mt-4">
+            <Button onClick={onClose} className="mt-4 bg-game-gold text-game-gold-foreground hover:bg-game-gold/90">
               Nästa låt
             </Button>
           </div>
@@ -55,7 +56,7 @@ export function TriviaPanel({
             <p className="text-xl md:text-2xl font-medium text-foreground">
               {questions[currentIndex]}
             </p>
-            <Button onClick={onNext} className="w-full">
+            <Button onClick={onNext} className="w-full bg-game-gold text-game-gold-foreground hover:bg-game-gold/90">
               Nästa fråga <ChevronRight className="w-4 h-4 ml-2" />
             </Button>
           </div>

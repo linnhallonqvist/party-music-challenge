@@ -12,33 +12,45 @@ export function GameBox({ number, word, isRevealed, onClick }: GameBoxProps) {
     <button
       onClick={onClick}
       className={cn(
-        "relative w-full aspect-square rounded-xl text-center transition-all duration-500 transform-gpu",
-        "shadow-lg hover:shadow-xl hover:scale-105",
-        "flex items-center justify-center",
+        "relative w-full aspect-[4/3] rounded-lg text-center transition-all duration-500",
+        "flex items-center justify-center overflow-hidden",
+        "border-4",
         isRevealed
-          ? "bg-game-gold text-game-gold-foreground rotate-y-180"
-          : "bg-game-blue text-game-blue-foreground cursor-pointer"
+          ? "bg-gradient-to-br from-game-gold/90 to-game-gold border-game-gold"
+          : "bg-gradient-to-br from-game-panel to-game-blue border-game-panel-border cursor-pointer hover:scale-105 hover:border-game-gold/50"
       )}
       style={{
-        perspective: "1000px",
-        transformStyle: "preserve-3d",
+        boxShadow: isRevealed 
+          ? "0 0 30px hsl(45 93% 55% / 0.5), inset 0 2px 10px rgba(255,255,255,0.2)" 
+          : "0 8px 32px rgba(0,0,0,0.4), inset 0 2px 10px rgba(255,255,255,0.1)",
       }}
     >
+      {/* Number display */}
       <div
         className={cn(
-          "absolute inset-0 flex items-center justify-center rounded-xl transition-opacity duration-300",
-          isRevealed ? "opacity-0" : "opacity-100"
+          "absolute inset-0 flex items-center justify-center transition-all duration-500",
+          isRevealed ? "opacity-0 scale-50" : "opacity-100 scale-100"
         )}
       >
-        <span className="text-4xl md:text-6xl font-bold drop-shadow-md">{number}</span>
+        <span 
+          className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-blue-300 via-blue-400 to-blue-500"
+          style={{
+            textShadow: "0 4px 20px rgba(100,150,255,0.5)",
+            WebkitTextStroke: "1px rgba(255,255,255,0.2)",
+          }}
+        >
+          {number}
+        </span>
       </div>
+      
+      {/* Word display */}
       <div
         className={cn(
-          "absolute inset-0 flex items-center justify-center rounded-xl p-2 transition-opacity duration-300",
-          isRevealed ? "opacity-100" : "opacity-0"
+          "absolute inset-0 flex items-center justify-center p-3 transition-all duration-500",
+          isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-150"
         )}
       >
-        <span className="text-xl md:text-3xl font-bold uppercase tracking-wide break-words">
+        <span className="text-lg md:text-2xl lg:text-3xl font-bold uppercase tracking-wider text-game-gold-foreground break-words text-center leading-tight">
           {word}
         </span>
       </div>

@@ -1,4 +1,44 @@
-# Welcome to your Lovable project
+# Party Music Challenge
+
+A party game where teams compete to guess songs based on revealed words and answer trivia questions.
+
+## Adding Songs and Questions
+
+Songs are stored in `src/data/songs.json`. To permanently add new songs, edit this file directly.
+
+### Song Format
+
+Each song follows this structure:
+
+```json
+{
+  "id": "unique-song-id",
+  "title": "Song Title",
+  "artist": "Artist Name",
+  "words": ["word1", "word2", "word3", "word4", "word5", "word6"],
+  "triviaQuestions": [
+    { "question": "Question about the song?", "answer": "The answer" },
+    { "question": "Another question?", "answer": "Another answer" }
+  ]
+}
+```
+
+- **id**: A unique identifier (e.g., `"song-3"`)
+- **words**: 6 words that hint at the song (displayed as boxes in the game)
+- **triviaQuestions**: Questions shown after a song is guessed (include both question and answer)
+
+### Using Backstage (Admin Panel)
+
+The app includes a Backstage page (`/admin`) where you can add, edit, and delete songs through a UI.
+
+**Important:** Changes made in Backstage are stored in your browser's local storage only. This means:
+- Changes will NOT persist if you clear browser data
+- Changes will NOT sync across devices or browsers
+- Changes will NOT be saved to the codebase
+
+To make permanent changes that persist across all users and deployments, edit `src/data/songs.json` directly.
+
+---
 
 ## Project info
 

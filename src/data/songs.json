@@ -1,24 +1,103 @@
 [
   {
     "id": "song-1",
-    "title": "Dancing Queen",
+    "title": "Gimme! Gimme! Gimme! (A man after midnight)",
     "artist": "ABBA",
-    "words": ["Friday", "night", "dancing", "queen", "seventeen", "tambourine"],
+    "words": ["There's", "not", "a", "soul", "out", "there"],
     "triviaQuestions": [
-      { "question": "Vilket år släpptes Dancing Queen?", "answer": "1976" },
-      { "question": "Vilken medlem i ABBA skrev huvudmelodin?", "answer": "Benny Andersson" },
-      { "question": "I vilken film används låten i en ikonisk scen?", "answer": "Mamma Mia!" }
+      { "question": "Vad står ABBA för?", "answer": "Agnetha Björn Benny Anni-Frid" },
+      { "question": "Vem använde riffet i låten i sin egna låt 'Hung Up'?", "answer": "Madonna" }
     ]
   },
   {
     "id": "song-2",
-    "title": "Sommartider",
+    "title": "Gå & fiska!",
     "artist": "Gyllene Tider",
-    "words": ["sommartider", "ringer", "glömma", "vågor", "strand", "sol"],
+    "words": ["ingenting", "är", "som", "det", "ska"],
     "triviaQuestions": [
-      { "question": "Vem är sångare i Gyllene Tider?", "answer": "Per Gessle" },
-      { "question": "Vilket år släpptes Sommartider?", "answer": "1982" },
-      { "question": "Vilket skivbolag gav ut låten?", "answer": "EMI" }
+      { "question": "Vart kommer Per Gessle ifrån?", "answer": "Halmstad" },
+      { "question": "Vad heter den fisk som vandrar mellan salt och sötvatten för att leka?", "answer": "Lax" }
+    ]
+  },
+  {
+    "id": "song-3",
+    "title": "Espresso",
+    "artist": "Sabrina Carpenter",
+    "words": ["say", "you", "can't", "sleep", "baby", "I", "know"],
+    "triviaQuestions": [
+      { "question": "Vad är en bågfil?", "answer": "En såg för att såga i metall" },
+      { "question": "När är Sabrina född?", "answer": "1999" }
+    ]
+  },
+  {
+    "id": "song-4",
+    "title": "Look who's laughing now",
+    "artist": "Benjamin Ingrosso",
+    "words": ["but", "I'm", "dancing", "with", "a", "model"],
+    "triviaQuestions": [
+      { "question": "Hur många syskon har Benjamin?", "answer": "3" },
+      { "question": "Vilken låt tävlade Benji med i Lilla Melodifestivalen 2006?", "answer": "Hej Sofia" }
+    ]
+  },
+  {
+    "id": "song-5",
+    "title": "Don't look back in anger",
+    "artist": "OASIS",
+    "words": ["don't", "look", "back", "in", "anger"],
+    "triviaQuestions": [
+      { "question": "Vad heter bröderna Gallagher i förnamn?", "answer": "Liam och Noel" },
+      { "question": "I vilken Engelsk stad startade bandet?", "answer": "Manchester" }
+    ]
+  },
+  {
+    "id": "song-6",
+    "title": "Let it go",
+    "artist": "Idina Menzel",
+    "words": ["the", "cold", "never", "bothered", "me", "anyway"],
+    "triviaQuestions": [
+      { "question": "Vad heter renen i Frozen?", "answer": "Sven" },
+      { "question": "När kom Frozen ut?", "answer": "2013" }
+    ]
+  },
+
+  {
+    "id": "song-7",
+    "title": "Kan inte gå",
+    "artist": "Bolaget",
+    "words": ["ingen", "fattar", "hur", "jag", "mår"],
+    "triviaQuestions": [
+      { "question": "Vilken stad kommer bolaget ifrån?", "answer": "Falun" },
+      { "question": "Vad är den starkaste alkoholhalten man kan köpa på systembolaget?", "answer": "80%" }
+    ]
+  },
+  {
+    "id": "song-8",
+    "title": "Don't stop me now",
+    "artist": "Queen",
+    "words": ["I'm", "having", "such", "a", "good", "time"],
+    "triviaQuestions": [
+      { "question": "Vad heter gitarristen i Queen", "answer": "Brian May" },
+      { "question": "Vilket år dog Queen Elizabeth II?", "answer": "2022" }
+    ]
+  },
+  {
+    "id": "song-9",
+    "title": "Det kommer aldrig va över för mig",
+    "artist": "Håkan Hellström",
+    "words": ["Men", "jag", "tänker", "aldrig", "dö", "nej"],
+    "triviaQuestions": [
+      { "question": "Vilket band spelade Håkan Hellström trummor i en period?", "answer": "Broder Daniel" },
+      { "question": "Vilken är den andra största staden i Norge?", "answer": "Bergen" }
+    ]
+  },
+  {
+    "id": "song-10",
+    "title": "...Baby one more time",
+    "artist": "Britney Spears",
+    "words": ["My", "lonelyness", "is", "killing", "me"],
+    "triviaQuestions": [
+      { "question": "Vilken stor låtskrivare har skrivit låten?", "answer": "Max Martin" },
+      { "question": "Vad kallades den sociala rörelse som startades av fans för att stötta Britney 2019?", "answer": "#FreeBritney" }
     ]
   }
 ]

@@ -33,7 +33,7 @@
     "id": "song-4",
     "title": "Look who's laughing now",
     "artist": "Benjamin Ingrosso",
-    "words": ["but", "I'm", "dancing", "with", "a", "model"],
+    "words": ["look", "who", "is", "laughing", "now"],
     "triviaQuestions": [
       { "question": "Hur många syskon har Benjamin?", "answer": "3" },
       { "question": "Vilken låt tävlade Benji med i Lilla Melodifestivalen 2006?", "answer": "Hej Sofia" }
@@ -74,7 +74,7 @@
     "id": "song-8",
     "title": "Don't stop me now",
     "artist": "Queen",
-    "words": ["I'm", "having", "such", "a", "good", "time"],
+    "words": ["I'm", "having", "a", "good", "time"],
     "triviaQuestions": [
       { "question": "Vad heter gitarristen i Queen", "answer": "Brian May" },
       { "question": "Vilket år dog Queen Elizabeth II?", "answer": "2022" }
@@ -84,7 +84,7 @@
     "id": "song-9",
     "title": "Det kommer aldrig va över för mig",
     "artist": "Håkan Hellström",
-    "words": ["Men", "jag", "tänker", "aldrig", "dö", "nej"],
+    "words": ["Det", "kommer", "aldrig", "va", "över", "för", "mig"],
     "triviaQuestions": [
       { "question": "Vilket band spelade Håkan Hellström trummor i en period?", "answer": "Broder Daniel" },
       { "question": "Vilken är den andra största staden i Norge?", "answer": "Bergen" }

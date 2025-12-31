@@ -7,7 +7,8 @@
     "triviaQuestions": [
       { "question": "Vad står ABBA för?", "answer": "Agnetha Björn Benny Anni-Frid" },
       { "question": "Vem använde riffet i låten i sin egna låt 'Hung Up'?", "answer": "Madonna" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/3vkQ5DAB1qQMYO4Mr9zJN6"
   },
   {
     "id": "song-2",
@@ -17,7 +18,8 @@
     "triviaQuestions": [
       { "question": "Vart kommer Per Gessle ifrån?", "answer": "Halmstad" },
       { "question": "Vad heter den fisk som vandrar mellan salt och sötvatten för att leka?", "answer": "Lax" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/4LZhxPSsWW6djAWn9IaI2F"
   },
   {
     "id": "song-3",
@@ -27,7 +29,8 @@
     "triviaQuestions": [
       { "question": "Vad är en bågfil?", "answer": "En såg för att såga i metall" },
       { "question": "När är Sabrina född?", "answer": "1999" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/2qSkIjg1o9h3YT9RAgYN75"
   },
   {
     "id": "song-4",
@@ -37,7 +40,8 @@
     "triviaQuestions": [
       { "question": "Hur många syskon har Benjamin?", "answer": "3" },
       { "question": "Vilken låt tävlade Benji med i Lilla Melodifestivalen 2006?", "answer": "Hej Sofia" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/5iBSvGT3waImHIGW1eEeH7"
   },
   {
     "id": "song-5",
@@ -47,7 +51,8 @@
     "triviaQuestions": [
       { "question": "Vad heter bröderna Gallagher i förnamn?", "answer": "Liam och Noel" },
       { "question": "I vilken Engelsk stad startade bandet?", "answer": "Manchester" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/7ppPZa3TRUSGKaks9wH7VT"
   },
   {
     "id": "song-6",
@@ -57,9 +62,9 @@
     "triviaQuestions": [
       { "question": "Vad heter renen i Frozen?", "answer": "Sven" },
       { "question": "När kom Frozen ut?", "answer": "2013" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/600HVBpzF1WfBdaRwbEvLz"
   },
-
   {
     "id": "song-7",
     "title": "Kan inte gå",
@@ -68,7 +73,8 @@
     "triviaQuestions": [
       { "question": "Vilken stad kommer bolaget ifrån?", "answer": "Falun" },
       { "question": "Vad är den starkaste alkoholhalten man kan köpa på systembolaget?", "answer": "80%" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/0JWBmtmAJMDRJEOhuclRw5"
   },
   {
     "id": "song-8",
@@ -78,7 +84,8 @@
     "triviaQuestions": [
       { "question": "Vad heter gitarristen i Queen", "answer": "Brian May" },
       { "question": "Vilket år dog Queen Elizabeth II?", "answer": "2022" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/5T8EDUDqKcs6OSOwEsfqG7"
   },
   {
     "id": "song-9",
@@ -88,7 +95,8 @@
     "triviaQuestions": [
       { "question": "Vilket band spelade Håkan Hellström trummor i en period?", "answer": "Broder Daniel" },
       { "question": "Vilken är den andra största staden i Norge?", "answer": "Bergen" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/3juwG7apLO9INZwaQDEBvC"
   },
   {
     "id": "song-10",
@@ -98,6 +106,7 @@
     "triviaQuestions": [
       { "question": "Vilken stor låtskrivare har skrivit låten?", "answer": "Max Martin" },
       { "question": "Vad kallades den sociala rörelse som startades av fans för att stötta Britney 2019?", "answer": "#FreeBritney" }
-    ]
+    ],
+    "spotifyUrl": "https://open.spotify.com/track/3MjUtNVVq3C8Fn0MP3zhXa"
   }
 ]

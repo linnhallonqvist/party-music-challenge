@@ -39,6 +39,7 @@ export function SongForm({ song, onSave, onCancel }: SongFormProps) {
   const [triviaText, setTriviaText] = useState(
     song?.triviaQuestions ? triviaToText(song.triviaQuestions) : ""
   );
+  const [spotifyUrl, setSpotifyUrl] = useState(song?.spotifyUrl || "");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +49,7 @@ export function SongForm({ song, onSave, onCancel }: SongFormProps) {
       artist,
       words: wordsText.split(",").map((w) => w.trim()).filter(Boolean),
       triviaQuestions: textToTrivia(triviaText),
+      spotifyUrl: spotifyUrl || undefined,
     };
     onSave(newSong);
   };
@@ -105,6 +107,16 @@ export function SongForm({ song, onSave, onCancel }: SongFormProps) {
               onChange={(e) => setTriviaText(e.target.value)}
               placeholder="Vilket år släpptes låten? | 1976&#10;Vem skrev låten? | Benny Andersson"
               rows={4}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="spotifyUrl">Spotify-länk (valfritt)</Label>
+            <Input
+              id="spotifyUrl"
+              value={spotifyUrl}
+              onChange={(e) => setSpotifyUrl(e.target.value)}
+              placeholder="https://open.spotify.com/track/..."
             />
           </div>
 

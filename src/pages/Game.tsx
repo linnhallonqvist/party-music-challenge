@@ -176,6 +176,7 @@ export default function Game() {
                 onClose={hideTrivia}
                 songTitle={currentSong.title}
                 artist={currentSong.artist}
+                spotifyUrl={currentSong.spotifyUrl}
               />
             </div>
           )}

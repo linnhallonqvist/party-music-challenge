@@ -11,6 +11,7 @@ export interface Song {
   artist: string;
   words: string[];
   triviaQuestions: TriviaQuestion[];
+  spotifyUrl?: string;
 }
 
 export const SONGS: Song[] = songsData;

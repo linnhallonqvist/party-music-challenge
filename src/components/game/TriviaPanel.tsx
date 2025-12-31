@@ -11,6 +11,7 @@ interface TriviaPanelProps {
   onClose: () => void;
   songTitle: string;
   artist: string;
+  spotifyUrl?: string;
 }
 
 export function TriviaPanel({
@@ -20,10 +21,17 @@ export function TriviaPanel({
   onClose,
   songTitle,
   artist,
+  spotifyUrl,
 }: TriviaPanelProps) {
   const [showAnswer, setShowAnswer] = useState(false);
   const currentQuestion = questions[currentIndex];
   const isLastQuestion = currentIndex >= questions.length - 1;
+
+  // Convert track URL to embed URL
+  const spotifyEmbedUrl = spotifyUrl?.replace(
+    "open.spotify.com/track",
+    "open.spotify.com/embed/track"
+  ) + "?utm_source=generator&theme=0";
 
   const handleNext = () => {
     setShowAnswer(false);
@@ -46,6 +54,17 @@ export function TriviaPanel({
           <Music className="w-5 h-5 text-game-gold" />
           {songTitle} - {artist}
         </div>
+        {spotifyUrl && (
+          <iframe
+            src={spotifyEmbedUrl}
+            width="100%"
+            height="80"
+            frameBorder={0}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            className="mt-2 rounded-lg"
+          />
+        )}
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
